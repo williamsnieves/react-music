@@ -19,7 +19,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['env', 'react', 'stage-2'],
-            plugins: ['syntax-dynamic-import']
+            plugins: ['transform-class-properties', 'syntax-dynamic-import']
           }
         }
       },

@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "test": "jest --colors --coverage --no-cache",
     "build:dev": "webpack --config ./config/webpack.config.babel.js --mode development",
     "build:dev:server": "webpack-dev-server --config ./config/webpack.dev.config.babel.js --env.NODE_ENV=development --progress --mode development",
     "server": "webpack-dev-server --env.NODE_ENV=development --mode development"
@@ -14,6 +15,7 @@
     "babel-jest": "^22.4.3",
     "babel-loader": "^7.1.3",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
@@ -54,7 +56,14 @@
       "<rootDir>/config/test/shim.js"
     ]
   },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
+  },
   "dependencies": {
+    "material-ui": "^0.20.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
