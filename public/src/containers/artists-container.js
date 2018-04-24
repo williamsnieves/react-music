@@ -4,20 +4,60 @@ import Search from '../components/search/'
 import ArtistsLayout from '../components/layouts/artists-layout'
 
 class ArtistsContainer extends Component {
-	handleSearchTerm (ev, newValue) {
-		console.log("WI WILL SEARCH SOMETHING", newValue)
+	constructor (props) {
+		super(props)
+		this.state = {
+			albums: []
+		}
 	}
-	render () {
-		return (
-			<div>
-				<ArtistsLayout>
-					<Search onChange={(ev, newValue) => this.handleSearchTerm(ev, newValue)} />
-					<Artists />
-				</ArtistsLayout>
-			</div>
-		)
-	}
-}
+  componentDidMount () {
+    fetch('http://localhost:3000/albums')
+    	.then(response => {
+    		if(response.ok) {
+    			return response.json()
+    		} else {
+    			throw new Error('Something went wrong')
+    		}
+    	})
+    	.then(responseJson => {
+    		this.setState({
+					albums: responseJson.data
+    		})
 
+    	})
+    	.catch(error => console.log(error))
+  }
+  getArtistData (artist) {
+  	fetch(`http://localhost:3000/search?term=${artist}`)
+	    	.then(response => {
+	    		if(response.ok) {
+	    			return response.json()
+	    		} else {
+	    			throw new Error('Something went wrong')
+	    		}
+	    	})
+	    	.then(responseJson => {
+	    		this.setState({
+						albums: responseJson.data
+	    		})
+
+	    	})
+	    	.catch(error => console.log(error))
+  }
+  handleSearchTerm (ev, newValue) {
+    console.log('WI WILL SEARCH SOMETHING', newValue)
+    this.getArtistData(newValue)
+  }
+  render () {
+    return (
+      <div>
+        <ArtistsLayout>
+          <Search onChange={(ev, newValue) => this.handleSearchTerm(ev, newValue)} />
+          <Artists albums={this.state.albums} />
+        </ArtistsLayout>
+      </div>
+    )
+  }
+}
 
 export default ArtistsContainer

@@ -2,13 +2,13 @@
 import React from 'react'
 import './index.scss'
 import { render } from 'react-dom'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import Application from './components/applicacion'
 
 const App = () => (
-	<MuiThemeProvider>
-		<Application />
+  <MuiThemeProvider>
+    <Application />
   </MuiThemeProvider>
 )
 

@@ -21,7 +21,7 @@ require("source-map-support").install();
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0cc03bb74b3a8645655b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8d98a29fd3df0e623b0d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -880,6 +880,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__("express");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__middleware__ = __webpack_require__("./src/middleware.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_request_promise__ = __webpack_require__("request-promise");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_request_promise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_request_promise__);
+
 
 
 //import { restRouter } from './api'
@@ -887,8 +890,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
 Object(__WEBPACK_IMPORTED_MODULE_1__middleware__["a" /* default */])(app);
 
-app.use('/deezer', function (req, res) {
-	res.json({ response: 'deezer' });
+app.use(function (req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
+
+app.use('/albums', function (req, res) {
+	__WEBPACK_IMPORTED_MODULE_2_request_promise___default()('https://api.deezer.com/search/album?q=helloween').then(function (result) {
+		res.json(JSON.parse(result));
+	});
+});
+
+app.use('/search', function (req, res) {
+	var urlToSearch = 'https://api.deezer.com/search/album?q=' + req.query.term;
+	__WEBPACK_IMPORTED_MODULE_2_request_promise___default()(urlToSearch).then(function (result) {
+		res.json(JSON.parse(result));
+	});
 });
 
 /* harmony default export */ __webpack_exports__["default"] = (app);
@@ -922,6 +940,13 @@ module.exports = require("express");
 /***/ (function(module, exports) {
 
 module.exports = require("http");
+
+/***/ }),
+
+/***/ "request-promise":
+/***/ (function(module, exports) {
+
+module.exports = require("request-promise");
 
 /***/ })
 
