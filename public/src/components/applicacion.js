@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import ArtistsContainer from '../containers/artists-container'
+import MainContainer from '../containers/main-container'
+
 
 export default class Application extends Component {
   render () {
     return (
       <div>
-        <ArtistsContainer />
+        <MainContainer />
       </div>
     )
   }

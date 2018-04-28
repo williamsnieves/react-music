@@ -21,7 +21,7 @@ require("source-map-support").install();
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8d98a29fd3df0e623b0d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "bfb3a396c228b6f8eef7"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -898,6 +898,12 @@ app.use(function (req, res, next) {
 
 app.use('/albums', function (req, res) {
 	__WEBPACK_IMPORTED_MODULE_2_request_promise___default()('https://api.deezer.com/search/album?q=helloween').then(function (result) {
+		res.json(JSON.parse(result));
+	});
+});
+
+app.use('/tracks/:albumId', function (req, res) {
+	__WEBPACK_IMPORTED_MODULE_2_request_promise___default()('https://api.deezer.com/album/' + req.params.albumId + '/tracks').then(function (result) {
 		res.json(JSON.parse(result));
 	});
 });

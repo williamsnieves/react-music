@@ -19,6 +19,13 @@ app.use('/albums', (req, res) => {
 		})
 })
 
+app.use('/tracks/:albumId', (req, res) => {
+	request(`https://api.deezer.com/album/${req.params.albumId}/tracks`)
+		.then(result => {
+			res.json(JSON.parse(result))
+		})
+})
+
 app.use('/search', (req, res) => {
 	const urlToSearch = `https://api.deezer.com/search/album?q=${req.query.term}`
 	request(urlToSearch)
