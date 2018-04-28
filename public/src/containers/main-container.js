@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ArtistsContainer from './artists-container'
-import PlaylistContainer from './playlist-container'
+import TracklistContainer from './tracklist-container'
+import PlayerContainer from './player-container'
 export default class MainContainer extends Component {
 	constructor (props) {
 		super(props)
@@ -17,10 +18,12 @@ export default class MainContainer extends Component {
 	}
 	render () {
 		return (
-			<React.Fragment>
-        {!this.state.showTracks && <ArtistsContainer showTracklist={(show, albumId) => this.showTracklist(show, albumId)}/>}
-        {this.state.showTracks && <PlaylistContainer albumId={this.state.albumId} />}
-			</React.Fragment>
+		<React.Fragment>
+      {!this.state.showTracks && <ArtistsContainer showTracklist={(show, albumId) => this.showTracklist(show, albumId)}/>}
+      {this.state.showTracks && <TracklistContainer albumId={this.state.albumId} />}
+
+      <PlayerContainer /> 
+		</React.Fragment>
 		)
 	}
 }
