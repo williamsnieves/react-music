@@ -1,14 +1,22 @@
-import React from 'react'
-import TextField from 'material-ui/TextField'
-import SearchIcon from '../icons/search-icon'
+import React from "react";
+import TextField from "material-ui/TextField";
+import SearchIcon from "../icons/search-icon";
 
-const Search = ({onChange}) => {
+const Search = ({ onChange }) => {
   return (
-    <div className='Search'>
-      <TextField fullWidth hintText='Search' onChange={(ev, newValue) => onChange(ev, newValue)} />
-      <SearchIcon className='Search-icon' style={{textAlign: 'right'}} color='#ccc' />
+    <div className="Search">
+      <TextField
+        fullWidth
+        hintText="Search"
+        onChange={(ev, newValue) => onChange(ev, newValue)}
+      />
+      <SearchIcon
+        className="Search-icon"
+        style={{ textAlign: "right" }}
+        color="#ccc"
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;
