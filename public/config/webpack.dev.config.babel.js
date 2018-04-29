@@ -22,7 +22,8 @@ module.exports = merge(baseConfig, {
   devServer: {
     inline: true,
     port: 9000,
-    historyApiFallback: true
+    historyApiFallback: true,
+    open: true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
